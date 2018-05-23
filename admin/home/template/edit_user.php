@@ -104,7 +104,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="">
-                            <h4 class="text-center text-primary">Users within their roles</h4>
+                            <h4 class="text-center text-primary">Edit user profile</h4>
                         </div>
                         <div class="card-body">
                             <div class="recent-meaasge"><hr>
@@ -114,27 +114,61 @@
                                    function users()
                                    {
                                      global $obj;
-                                     $sql="SELECT * FROM user";
+                                     $file_id=$_GET['id'];
+                                     $sql="SELECT * FROM user where user_id='$file_id'";
                                      $result_set=mysqli_query($obj->conn,$sql) or die(mysqli_connect_error($sql));
                                      while($row=mysqli_fetch_array($result_set))
                                      {
                                        ?>
-                                       <div class="media col-12 col-lg-11 mx-auto">
-                                            <div class="media-left">
-                                                 <a href="#"><img alt="..." src="images/default.jpg" class="media-object"></a>
-                                             </div>
-                                             <div class="media-body">
-                                                 <h4 class="media-heading"><?php echo $row['firstname']." ".$row['lastname'] ?></h4>
-                                                 <div class="meaasge-date">
-                                                   <a href="../data/delete.php?id=<?php echo $row['user_id'] ?>" class="btn text-danger">Delete</a>
-                                                   <a href="edit_user.php?id=<?php echo $row['user_id'] ?>" class="btn text-primary">Edit</a>
-                                                 </div>
-                                                 <p class="f-s-12"><?php echo "Role: ".$row['priviledge'] ?></p>
-                                                 <p class="f-s-12"><?php echo "E-mail: ".$row['email'] ?></p>
-                                                 <p class="f-s-12"><?php echo "Phone: ".$row['phone'] ?></p>
-                                                 <p class="text-center text-info">Last Login: <small><?php echo $row['lastlogindate']." ".$row['lastlogintime'] ?></small> </p>
-                                             </div>
-                                       </div>
+                                       <form class="mx-2" action="../data/update.php?id=<?php echo $row['user_id'] ?>" method="post">
+                                         <div class="row">
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">First Name</label>
+                                             <input type="text" name="fname" value="<?php echo $row['firstname'] ?>" placeholder="First Name" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">Last Name</label>
+                                             <input type="text" name="lname" value="<?php echo $row['lastname'] ?>" placeholder="Last Name" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">ID No</label>
+                                             <input type="text" name="idno" value="<?php echo $row['idno'] ?>" placeholder="ID No" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">Phone No</label>
+                                             <input type="text" name="phone" value="<?php echo $row['phone'] ?>" placeholder="Phone No" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">E-mail</label>
+                                             <input type="email" name="email" value="<?php echo $row['email'] ?>" placeholder="E-mail" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">Gender</label>
+                                             <select class="custom-select" name="gender">
+                                               <option value="<?php echo $row['gender'] ?>">Gender</option>
+                                               <option value="Male">Male</option>
+                                               <option value="Female">Female</option>
+                                             </select>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">User type</label>
+                                             <select class="custom-select" name="user_type">
+                                               <option value="<?php echo $row['priviledge'] ?>">User type</option>
+                                               <option value="Supervisor">Supervisor</option>
+                                               <option value="Enumerator">Enumerator</option>
+                                               <option value="Manager">Manager</option>
+                                               <option value="Administrator">Administrator</option>
+                                             </select>
+                                           </div>
+                                           <div class="col-12 col-lg-6 form-group">
+                                             <label for="">Password</label>
+                                             <input type="password" name="password" value="<?php echo $row['password'] ?>" placeholder="Password" class="form-control" required>
+                                           </div>
+                                           <div class="col-12 col-lg-8 mx-auto form-group my-2">
+                                             <input type="submit" name="update" value="Update user info" class="btn btn-secondary btn-block">
+                                           </div>
+                                         </div>
+                                       </form>
                                        <?php
                                      }
                                    }

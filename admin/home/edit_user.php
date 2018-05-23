@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php include("../data/config.php") ?>
+<?php include("../data/config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +35,7 @@
       if(!isset($_SESSION['admin_email']) || !isset($_SESSION['admin_password'])){
         header("Location:../index.php");
       }else {
-        include("template/feadback.php");
+        include("template/edit_user.php");
       }
      ?>
     <!-- End Wrapper -->
