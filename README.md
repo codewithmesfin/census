@@ -16,3 +16,4 @@ I have used XAMPP in my case.
 9. open new tab on your browser and type "localhost/census" for public web page and "localhost/census/admin" for admins.
 10. a nice dybnamic and responsive web application ...........
 
+# woldiya_census_bureau
